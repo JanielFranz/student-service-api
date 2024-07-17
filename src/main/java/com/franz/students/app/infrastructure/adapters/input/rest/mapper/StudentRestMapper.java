@@ -8,6 +8,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Mapper(componentModel = "spring"
         //ignoring unmapped properties in the target object
@@ -21,6 +22,11 @@ public interface StudentRestMapper {
     @Mapping(target = "timeStamp", expression = "java(mapTimeStamp())")
       StudentResponse toStudentResponseFromStudent(Student student);
 
+     //For findAll method, I return a list of StudentResponse
+    List<StudentResponse> toStudentResponsesFromStudents(List<Student> students);
+
+
+    //default method for mapping the timestamp
     default String mapTimeStamp(){
         return LocalDateTime.now().toString();
     }
